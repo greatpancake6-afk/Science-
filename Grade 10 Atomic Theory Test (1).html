@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 10 Science: Atomic Theory Mastery Test</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .electron-dot {
+            transition: all 0.2s ease-in-out;
+        }
+        .electron-dot:hover {
+            transform: scale(1.3);
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+        .zoom-container {
+            overflow: auto;
+            cursor: grab;
+        }
+        .zoom-container:active {
+            cursor: grabbing;
+        }
+        .ptable-img {
+            transition: transform 0.2s ease-out;
+            transform-origin: top left;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-blue-500 selection:text-white">
+
+    <!-- Top Navigation / Header -->
+    <header class="sticky top-0 z-40 glass-card border-b border-slate-800 px-4 lg:px-8 py-3">
+        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-4">
+            <div class="flex items-center space-x-3">
+                <div class="p-2.5 bg-blue-600/20 text-blue-400 rounded-xl border border-blue-500/30">
+                    <i class="fa-solid fa-atom text-2xl animate-spin" style="animation-duration: 12s;"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg text-white leading-tight">Grade 10 Science: Atomic Theory</h1>
+                    <p class="text-xs text-slate-400">Comprehensive 50-Question Practice Examination</p>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <!-- Timer -->
+                <div class="flex items-center space-x-2 bg-slate-800/80 px-3 py-1.5 rounded-lg border border-slate-700/60 text-slate-300 text-sm font-mono">
+                    <i class="fa-regular fa-clock text-blue-400"></i>
+                    <span id="timer-display">00:00:00</span>
+                </div>
+
+                <!-- Progress Counter -->
+                <div class="flex items-center space-x-2 bg-slate-800/80 px-3 py-1.5 rounded-lg border border-slate-700/60 text-slate-300 text-sm font-mono">
+                    <i class="fa-solid fa-list-check text-emerald-400"></i>
+                    <span id="progress-text">0/50 Answered</span>
+                </div>
+
+                <!-- Action Button -->
+                <button onclick="submitExam()" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold px-4 py-1.5 rounded-lg transition-all shadow-lg shadow-blue-600/20 text-sm flex items-center space-x-2">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    <span>Submit Exam</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="w-full bg-slate-800 h-1.5 mt-3 rounded-full overflow-hidden">
+            <div id="progress-bar" class="bg-gradient-to-r from-blue-500 via-indigo-500 to-emerald-400 h-full w-0 transition-all duration-300"></div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 lg:px-8 py-8 flex-1 w-full space-y-10">
+
+        <!-- Banner / Instructions -->
+        <div class="glass-card rounded-2xl p-6 border-l-4 border-l-blue-500 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div class="space-y-2 max-w-3xl">
+                <div class="flex items-center space-x-2 text-blue-400 font-semibold text-sm uppercase tracking-wider">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <span>Grade 10 Science Practice Assessment</span>
+                </div>
+                <h2 class="text-2xl font-bold text-white">Atomic Theory & Structure Practice Exam</h2>
+                <p class="text-slate-300 text-sm leading-relaxed">
+                    This test covers <strong>subatomic particles, isotopes, ions, periodic families, Bohr shell diagrams, and Lewis dot structures</strong>. Complete all 50 questions across 5 core sections.
+                </p>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+                <button onclick="scrollToSection('part1')" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-xs font-medium rounded-xl text-slate-300 transition border border-slate-700">
+                    <i class="fa-solid fa-arrow-down mr-1"></i> Jump to Test
+                </button>
+                <button onclick="openPeriodicTableModal()" class="px-3.5 py-2 bg-blue-600/20 hover:bg-blue-600/30 text-xs font-semibold rounded-xl text-blue-300 transition border border-blue-500/40 flex items-center justify-center space-x-2 shadow-sm">
+                    <i class="fa-solid fa-table-cells text-blue-400"></i>
+                    <span>View Periodic Table</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Section Navigation Tabs -->
+        <div class="flex flex-wrap gap-2 border-b border-slate-800 pb-3">
+            <button onclick="scrollToSection('part1')" class="px-4 py-2 bg-slate-800/80 hover:bg-slate-700 rounded-xl text-xs sm:text-sm font-medium text-slate-200 border border-slate-700 transition flex items-center space-x-2">
+                <span class="w-5 h-5 bg-blue-500/20 text-blue-400 rounded-full text-xs flex items-center justify-center font-bold">1</span>
+                <span>Multiple Choice (Q1–15)</span>
+            </button>
+            <button onclick="scrollToSection('part2')" class="px-4 py-2 bg-slate-800/80 hover:bg-slate-700 rounded-xl text-xs sm:text-sm font-medium text-slate-200 border border-slate-700 transition flex items-center space-x-2">
+                <span class="w-5 h-5 bg-indigo-500/20 text-indigo-400 rounded-full text-xs flex items-center justify-center font-bold">2</span>
+                <span>Fill in Blanks (Q16–25)</span>
+            </button>
+            <button onclick="scrollToSection('part3')" class="px-4 py-2 bg-slate-800/80 hover:bg-slate-700 rounded-xl text-xs sm:text-sm font-medium text-slate-200 border border-slate-700 transition flex items-center space-x-2">
+                <span class="w-5 h-5 bg-purple-500/20 text-purple-400 rounded-full text-xs flex items-center justify-center font-bold">3</span>
+                <span>Matching Concepts (Q26–35)</span>
+            </button>
+            <button onclick="scrollToSection('part4')" class="px-4 py-2 bg-slate-800/80 hover:bg-slate-700 rounded-xl text-xs sm:text-sm font-medium text-slate-200 border border-slate-700 transition flex items-center space-x-2">
+                <span class="w-5 h-5 bg-emerald-500/20 text-emerald-400 rounded-full text-xs flex items-center justify-center font-bold">4</span>
+                <span>Subatomic Table (Q36–40)</span>
+            </button>
+            <button onclick="scrollToSection('part5')" class="px-4 py-2 bg-slate-800/80 hover:bg-slate-700 rounded-xl text-xs sm:text-sm font-medium text-slate-200 border border-slate-700 transition flex items-center space-x-2">
+                <span class="w-5 h-5 bg-amber-500/20 text-amber-400 rounded-full text-xs flex items-center justify-center font-bold">5</span>
+                <span>Bohr & Lewis Diagrams (Q41–50)</span>
+            </button>
+        </div>
+
+        <!-- PART 1: MULTIPLE CHOICE (Q1-15) -->
+        <section id="part1" class="space-y-6">
+            <div class="flex items-center justify-between border-l-4 border-blue-500 pl-4 py-1">
+                <div>
+                    <h3 class="text-xl font-bold text-white">Part 1: Multiple Choice Questions</h3>
+                    <p class="text-xs text-slate-400">Select the single best answer for each question (Questions 1 to 15).</p>
+                </div>
+                <span class="bg-blue-500/10 text-blue-400 text-xs font-semibold px-3 py-1 rounded-full border border-blue-500/20">15 Marks</span>
+            </div>
+
+            <div id="mcq-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- MCQ cards populated via JavaScript -->
+            </div>
+        </section>
+
+        <!-- PART 2: FILL IN THE BLANKS (Q16-25) -->
+        <section id="part2" class="space-y-6">
+            <div class="flex items-center justify-between border-l-4 border-indigo-500 pl-4 py-1">
+                <div>
+                    <h3 class="text-xl font-bold text-white">Part 2: Fill in the Blank Terminology</h3>
+                    <p class="text-xs text-slate-400">Type the correct term or number to complete each scientific statement (Questions 16 to 25).</p>
+                </div>
+                <span class="bg-indigo-500/10 text-indigo-400 text-xs font-semibold px-3 py-1 rounded-full border border-indigo-500/20">10 Marks</span>
+            </div>
+
+            <div id="fill-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Fill in the blank cards populated via JS -->
+            </div>
+        </section>
+
+        <!-- PART 3: MATCHING CONCEPTS (Q26-35) -->
+        <section id="part3" class="space-y-6">
+            <div class="flex items-center justify-between border-l-4 border-purple-500 pl-4 py-1">
+                <div>
+                    <h3 class="text-xl font-bold text-white">Part 3: Matching Key Terms & Concepts</h3>
+                    <p class="text-xs text-slate-400">Match each definition or property with its correct corresponding term (Questions 26 to 35).</p>
+                </div>
+                <span class="bg-purple-500/10 text-purple-400 text-xs font-semibold px-3 py-1 rounded-full border border-purple-500/20">10 Marks</span>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="glass-card rounded-2xl p-6 space-y-4">
+                    <h4 class="font-bold text-slate-200 text-base flex items-center space-x-2">
+                        <i class="fa-solid fa-vial text-purple-400"></i>
+                        <span>Matching Set A: Chemical Families (Q26–30)</span>
+                    </h4>
+                    <div id="matching-set-a" class="space-y-4">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-2xl p-6 space-y-4">
+                    <h4 class="font-bold text-slate-200 text-base flex items-center space-x-2">
+                        <i class="fa-solid fa-shapes text-purple-400"></i>
+                        <span>Matching Set B: Atomic Terminology (Q31–35)</span>
+                    </h4>
+                    <div id="matching-set-b" class="space-y-4">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PART 4: DATA & CALCULATIONS (Q36-40) -->
+        <section id="part4" class="space-y-6">
+            <div class="flex items-center justify-between border-l-4 border-emerald-500 pl-4 py-1">
+                <div>
+                    <h3 class="text-xl font-bold text-white">Part 4: Subatomic Particle Calculation Table</h3>
+                    <p class="text-xs text-slate-400">Determine and fill in the missing subatomic values for each atom or ion (Questions 36 to 40).</p>
+                </div>
+                <span class="bg-emerald-500/10 text-emerald-400 text-xs font-semibold px-3 py-1 rounded-full border border-emerald-500/20">5 Marks</span>
+            </div>
+
+            <div class="glass-card rounded-2xl p-6 overflow-x-auto">
+                <table class="w-full text-xs sm:text-sm border-collapse min-w-[650px]">
+                    <thead>
+                        <tr class="border-b border-slate-700 text-slate-300">
+                            <th class="p-3 text-left">Q#</th>
+                            <th class="p-3 text-left">Atom / Ion Name</th>
+                            <th class="p-3 text-center">Atomic # (Z)</th>
+                            <th class="p-3 text-center">Mass # (A)</th>
+                            <th class="p-3 text-center">Protons (p⁺)</th>
+                            <th class="p-3 text-center">Neutrons (n⁰)</th>
+                            <th class="p-3 text-center">Electrons (e⁻)</th>
+                            <th class="p-3 text-center">Net Charge</th>
+                        </tr>
+                    </thead>
+                    <tbody id="subatomic-table-body" class="divide-y divide-slate-800 font-mono">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- PART 5: INTERACTIVE BOHR & LEWIS DIAGRAMS (Q41-50) -->
+        <section id="part5" class="space-y-6">
+            <div class="flex items-center justify-between border-l-4 border-amber-500 pl-4 py-1">
+                <div>
+                    <h3 class="text-xl font-bold text-white">Part 5: Interactive Bohr & Lewis Diagrams</h3>
+                    <p class="text-xs text-slate-400">Configure the correct electron shell counts and valence dots for each element (Questions 41 to 50).</p>
+                </div>
+                <span class="bg-amber-500/10 text-amber-400 text-xs font-semibold px-3 py-1 rounded-full border border-amber-500/20">10 Marks</span>
+            </div>
+
+            <!-- Bohr Models (Q41-45) -->
+            <div class="space-y-4">
+                <h4 class="text-base font-bold text-slate-200 flex items-center space-x-2">
+                    <i class="fa-solid fa-circle-dot text-amber-400"></i>
+                    <span>Bohr Shell Models (Q41–45)</span>
+                </h4>
+                <div id="bohr-questions-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- Lewis Structures (Q46-50) -->
+            <div class="space-y-4 pt-4">
+                <h4 class="text-base font-bold text-slate-200 flex items-center space-x-2">
+                    <i class="fa-solid fa-braille text-amber-400"></i>
+                    <span>Lewis Dot Structures (Q46–50)</span>
+                </h4>
+                <div id="lewis-questions-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Interactive Zoomable Periodic Table Modal -->
+    <div id="ptable-modal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md hidden z-50 flex items-center justify-center p-2 sm:p-4">
+        <div class="glass-card rounded-3xl max-w-6xl w-full p-4 sm:p-6 space-y-4 border border-slate-700 max-h-[95vh] flex flex-col justify-between">
+            <div class="flex flex-wrap items-center justify-between border-b border-slate-800 pb-3 gap-3">
+                <div>
+                    <h3 class="text-lg font-bold text-white flex items-center space-x-2">
+                        <i class="fa-solid fa-table-cells text-blue-400"></i>
+                        <span>Periodic Table of Elements Reference</span>
+                    </h3>
+                    <p class="text-xs text-slate-400">Use zoom buttons or mouse scroll/drag to inspect element details</p>
+                </div>
+                
+                <div class="flex items-center space-x-2">
+                    <!-- Zoom Controls -->
+                    <div class="flex items-center space-x-1 bg-slate-800 border border-slate-700 rounded-xl p-1">
+                        <button onclick="zoomPTable(-0.25)" title="Zoom Out" class="w-8 h-8 rounded-lg bg-slate-700 hover:bg-slate-600 text-slate-200 font-bold text-sm flex items-center justify-center">
+                            <i class="fa-solid fa-minus"></i>
+                        </button>
+                        <span id="zoom-level-text" class="text-xs font-mono px-2 text-slate-300 font-bold min-w-[50px] text-center">100%</span>
+                        <button onclick="zoomPTable(0.25)" title="Zoom In" class="w-8 h-8 rounded-lg bg-slate-700 hover:bg-slate-600 text-slate-200 font-bold text-sm flex items-center justify-center">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                        <button onclick="resetPTableZoom()" title="Reset Zoom" class="px-2.5 h-8 rounded-lg bg-slate-700 hover:bg-slate-600 text-slate-200 font-semibold text-xs flex items-center justify-center space-x-1">
+                            <i class="fa-solid fa-rotate-left"></i>
+                            <span class="hidden sm:inline">Reset</span>
+                        </button>
+                    </div>
+
+                    <button onclick="closePeriodicTableModal()" class="text-slate-400 hover:text-white p-2 rounded-xl bg-slate-800 border border-slate-700">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- High Quality Periodic Table Container with Drag / Zoom -->
+            <div id="zoom-viewport" class="zoom-container overflow-auto max-h-[72vh] rounded-2xl bg-slate-900/90 p-4 border border-slate-800 flex items-start justify-start">
+                <div id="ptable-wrapper" class="ptable-img min-w-full">
+                    <img id="ptable-img-element" 
+                         src="https://upload.wikimedia.org/wikipedia/commons/ thumb/0/03/Periodic_table_large.svg/2560px-Periodic_table_large.svg.png"
+                         alt="Periodic Table of Elements Reference"
+                         class="w-full max-w-none h-auto rounded-lg shadow-2xl block"
+                         onerror="handlePTableImageError(this)" />
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center text-xs text-slate-400">
+                <span>Tip: Click and drag inside the viewport to pan around zoomed image</span>
+                <button onclick="closePeriodicTableModal()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-xs font-semibold rounded-xl text-slate-200 border border-slate-700">
+                    Close Reference
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Detailed Results & Answer Review Modal -->
+    <div id="results-modal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md hidden z-50 flex items-center justify-center p-3 sm:p-5">
+        <div class="glass-card rounded-3xl max-w-3xl w-full p-6 space-y-6 border border-slate-700 max-h-[92vh] flex flex-col justify-between">
+            
+            <!-- Modal Header -->
+            <div class="text-center space-y-2 border-b border-slate-800 pb-4">
+                <div class="w-14 h-14 bg-blue-600/20 text-blue-400 rounded-full flex items-center justify-center mx-auto text-2xl border border-blue-500/30">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-white">Test Performance & Analysis</h3>
+                <p class="text-xs text-slate-400">Review your final score and detailed question breakdown below</p>
+            </div>
+
+            <div class="overflow-y-auto space-y-6 pr-1 flex-1">
+                <!-- Summary Cards -->
+                <div class="grid grid-cols-3 gap-3 text-center">
+                    <div class="bg-slate-900/90 p-3 rounded-2xl border border-slate-800">
+                        <div class="text-xs text-slate-400">Total Score</div>
+                        <div id="score-total" class="text-xl font-bold text-blue-400 font-mono mt-1">0 / 50</div>
+                    </div>
+                    <div class="bg-slate-900/90 p-3 rounded-2xl border border-slate-800">
+                        <div class="text-xs text-slate-400">Percentage</div>
+                        <div id="score-percent" class="text-xl font-bold text-emerald-400 font-mono mt-1">0%</div>
+                    </div>
+                    <div class="bg-slate-900/90 p-3 rounded-2xl border border-slate-800">
+                        <div class="text-xs text-slate-400">Grade Level</div>
+                        <div id="score-grade" class="text-xl font-bold text-amber-400 font-mono mt-1">-</div>
+                    </div>
+                </div>
+
+                <!-- Section Scores -->
+                <div class="space-y-3">
+                    <h4 class="text-xs font-semibold text-slate-300 uppercase tracking-wider">Breakdown by Section</h4>
+                    <div id="section-breakdown" class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                        <!-- Breakdown lines populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Teacher Feedback -->
+                <div class="bg-slate-900/90 p-4 rounded-2xl border border-slate-800 space-y-1">
+                    <h4 class="text-xs font-semibold text-blue-400 uppercase tracking-wider">Evaluation & Feedback</h4>
+                    <p id="recommendations-text" class="text-xs text-slate-300 leading-relaxed"></p>
+                </div>
+
+                <!-- DETAILED INCORRECT QUESTIONS LIST -->
+                <div class="space-y-3 pt-2">
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+                        <h4 class="text-sm font-bold text-white flex items-center space-x-2">
+                            <i class="fa-solid fa-list-check text-amber-400"></i>
+                            <span>Detailed Answer Review</span>
+                        </h4>
+                        <span id="wrong-count-badge" class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-300"></span>
+                    </div>
+
+                    <div id="wrong-questions-list" class="space-y-3">
+                        <!-- Populated by JS: Shows all missed questions with user answer vs correct answer -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Footer Controls -->
+            <div class="pt-4 border-t border-slate-800 flex flex-col sm:flex-row gap-3">
+                <button onclick="closeResultsModal()" class="flex-1 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-semibold border border-slate-700 transition">
+                    <i class="fa-solid fa-eye mr-1.5"></i> Review Test Inline
+                </button>
+                <button onclick="resetTest()" class="flex-1 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-semibold shadow-lg shadow-blue-600/20 transition">
+                    <i class="fa-solid fa-rotate-right mr-1.5"></i> Retake Test
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // State variables
+        let secondsElapsed = 0;
+        let timerInterval = null;
+        let userAnswers = {};
+        let currentPTableScale = 1.0;
+
+        // Interactive states for Bohr and Lewis questions
+        const bohrState = {
+            41: [0, 0, 0],
+            42: [0, 0, 0],
+            43: [0, 0, 0],
+            44: [0, 0, 0],
+            45: [0, 0, 0]
+        };
+
+        const lewisState = {
+            46: 0,
+            47: 0,
+            48: 0,
+            49: 0,
+            50: 0
+        };
+
+        // 1. Multiple Choice Questions (1-15) - Standard HTML sub/sup, clean symbols
+        const mcqQuestions = [
+            {
+                id: 1,
+                question: "Which subatomic particle carries a negative charge and orbits the nucleus in energy levels?",
+                options: ["Proton", "Neutron", "Electron", "Alpha particle"],
+                correct: 2,
+                explanation: "Electrons carry a -1 charge and occupy outer energy shells around the central nucleus."
+            },
+            {
+                id: 2,
+                question: "Which statement best describes the electrical charge and concentration of mass in an atom's nucleus?",
+                options: [
+                    "The nucleus is negatively charged and contains almost no mass.",
+                    "The nucleus is positively charged and contains virtually all of the atom's mass.",
+                    "The nucleus is neutral and contains equal protons and electrons.",
+                    "The nucleus has a variable charge and orbits the electron cloud."
+                ],
+                correct: 1,
+                explanation: "Protons (+1) and neutrons (0) are concentrated in the dense nucleus, giving it a positive charge and almost all mass."
+            },
+            {
+                id: 3,
+                question: "What is the maximum number of electrons that can fit in the FIRST inner energy shell of an atom?",
+                options: ["2 electrons", "8 electrons", "18 electrons", "32 electrons"],
+                correct: 0,
+                explanation: "The first energy level closest to the nucleus holds up to 2 electrons."
+            },
+            {
+                id: 4,
+                question: "An atom of Carbon-14 (<sup>14</sup><sub>6</sub>C) differs from Carbon-12 (<sup>12</sup><sub>6</sub>C) in its number of:",
+                options: ["Protons", "Electrons", "Neutrons", "Valence electrons"],
+                correct: 2,
+                explanation: "Isotopes of an element have the same number of protons (6) but different numbers of neutrons (8 vs 6)."
+            },
+            {
+                id: 5,
+                question: "When a neutral Sodium atom (Na) forms a stable Sodium ion (Na<sup>+</sup>), it:",
+                options: [
+                    "Gains 1 proton in its nucleus.",
+                    "Loses 1 valence electron from its outer shell.",
+                    "Gains 1 electron in its 3rd shell.",
+                    "Loses 1 neutron from its nucleus."
+                ],
+                correct: 1,
+                explanation: "Sodium loses 1 valence electron to leave a full outer shell, forming a positive cation (Na<sup>+</sup>)."
+            },
+            {
+                id: 6,
+                question: "Which chemical family on the periodic table is extremely unreactive because its elements have full outer electron shells?",
+                options: ["Alkali Metals (Group 1)", "Alkaline Earth Metals (Group 2)", "Halogens (Group 17)", "Noble Gases (Group 18)"],
+                correct: 3,
+                explanation: "Noble gases (He, Ne, Ar) have full outer valence shells, making them chemically inert."
+            },
+            {
+                id: 7,
+                question: "The vertical columns on the periodic table are called ______ and indicate the number of ______ in representative elements.",
+                options: [
+                    "Periods; electron shells",
+                    "Groups; valence electrons",
+                    "Periods; protons",
+                    "Groups; neutrons"
+                ],
+                correct: 1,
+                explanation: "Groups (vertical columns) contain elements with the same number of valence electrons and similar properties."
+            },
+            {
+                id: 8,
+                question: "When a non-metal atom forms an anion with a 2- charge (such as S<sup>2-</sup>), what has occurred?",
+                options: [
+                    "The atom lost 2 protons from its nucleus.",
+                    "The atom gained 2 electrons into its valence shell.",
+                    "The atom lost 2 valence electrons.",
+                    "The atom shared 2 neutrons."
+                ],
+                correct: 1,
+                explanation: "Gaining 2 extra negative electrons gives the atom an overall charge of 2-."
+            },
+            {
+                id: 9,
+                question: "An ion of Oxygen has a charge of 2- (O<sup>2-</sup>). How many total electrons does this oxide ion contain?",
+                options: ["6 electrons", "8 electrons", "10 electrons", "16 electrons"],
+                correct: 2,
+                explanation: "Oxygen has atomic number 8 (8 protons). The O<sup>2-</sup> ion has gained 2 electrons: 8 + 2 = 10 electrons."
+            },
+            {
+                id: 10,
+                question: "Which of the following elements is classified as a metalloid (semimetal)?",
+                options: ["Aluminum (Al)", "Silicon (Si)", "Phosphorus (P)", "Sulfur (S)"],
+                correct: 1,
+                explanation: "Silicon (Si) lies along the staircase line and exhibits properties of both metals and non-metals."
+            },
+            {
+                id: 11,
+                question: "What information is provided by the period number (horizontal row) of an element on the periodic table?",
+                options: [
+                    "The number of protons in the nucleus",
+                    "The number of energy levels / electron shells occupied",
+                    "The total charge of the ion",
+                    "The number of neutrons"
+                ],
+                correct: 1,
+                explanation: "The period number indicates the total number of occupied electron energy levels in the atom."
+            },
+            {
+                id: 12,
+                question: "Why do Lewis dot structures show ONLY the valence electrons rather than all electrons?",
+                options: [
+                    "Inner shell electrons are destroyed during reactions.",
+                    "Valence electrons are the ones involved in chemical bonding and reactions.",
+                    "Inner electrons cannot be measured scientifically.",
+                    "It is purely an arbitrary choice."
+                ],
+                correct: 1,
+                explanation: "Valence electrons in the outermost shell interact to form chemical bonds."
+            },
+            {
+                id: 13,
+                question: "Which subatomic particle has nearly zero mass (~1/2000th amu) compared to protons and neutrons?",
+                options: ["Proton", "Neutron", "Electron", "Nucleus"],
+                correct: 2,
+                explanation: "Electrons have negligible mass compared to protons and neutrons (~1 amu each)."
+            },
+            {
+                id: 14,
+                question: "A neutral atom has atomic number 17 and mass number 35. How many protons, neutrons, and electrons does it have?",
+                options: [
+                    "17 p⁺, 18 n⁰, 17 e⁻",
+                    "17 p⁺, 35 n⁰, 17 e⁻",
+                    "18 p⁺, 17 n⁰, 18 e⁻",
+                    "35 p⁺, 17 n⁰, 35 e⁻"
+                ],
+                correct: 0,
+                explanation: "Protons = 17; Electrons = 17 (neutral); Neutrons = Mass Number (35) - Protons (17) = 18."
+            },
+            {
+                id: 15,
+                question: "Halogens (Group 17) are highly reactive non-metals because they need to:",
+                options: [
+                    "Lose 1 valence electron to clear their shell.",
+                    "Gain 1 valence electron to achieve a full outer shell.",
+                    "Lose 7 electrons to clear their outer shell.",
+                    "Gain 2 electrons to form a 2- anion."
+                ],
+                correct: 1,
+                explanation: "Halogens have 7 valence electrons and gain 1 electron to complete an 8-electron outer shell."
+            }
+        ];
+
+        // 2. Fill in the Blank Questions (16-25)
+        const fillQuestions = [
+            {
+                id: 16,
+                question: "The subatomic particle that defines the identity of an element (its atomic number) is the ________.",
+                answer: "proton",
+                altAnswers: ["protons"],
+                hint: "Positively charged particle in the nucleus."
+            },
+            {
+                id: 17,
+                question: "Atoms of the same element that have the same number of protons but different numbers of neutrons are called ________.",
+                answer: "isotopes",
+                altAnswers: ["isotope"],
+                hint: "e.g., Carbon-12 and Carbon-14."
+            },
+            {
+                id: 18,
+                question: "A positively charged ion formed when an atom loses one or more electrons is called a ________.",
+                answer: "cation",
+                altAnswers: ["cations"],
+                hint: "Metals form these positive ions."
+            },
+            {
+                id: 19,
+                question: "A negatively charged ion formed when an atom gains one or more electrons is called an ________.",
+                answer: "anion",
+                altAnswers: ["anions"],
+                hint: "Non-metals form these negative ions."
+            },
+            {
+                id: 20,
+                question: "The electrons located in the outermost occupied energy shell of an atom are known as ________ electrons.",
+                answer: "valence",
+                altAnswers: ["valence electrons"],
+                hint: "These determine chemical bonding."
+            },
+            {
+                id: 21,
+                question: "The central dense core of an atom containing protons and neutrons is called the ________.",
+                answer: "nucleus",
+                altAnswers: [],
+                hint: "Contains almost all of the atom's mass."
+            },
+            {
+                id: 22,
+                question: "Group 1 elements on the periodic table (excluding Hydrogen) are known as the ________ metals.",
+                answer: "alkali",
+                altAnswers: ["alkali metals"],
+                hint: "Soft, highly reactive metals like Na and K."
+            },
+            {
+                id: 23,
+                question: "The maximum capacity of the second energy shell in a Grade 10 Bohr model is ________ electrons.",
+                answer: "8",
+                altAnswers: ["eight"],
+                hint: "Holds up to 8 electrons."
+            },
+            {
+                id: 24,
+                question: "The total number of protons plus neutrons in an atom's nucleus is called the ________ number.",
+                answer: "mass",
+                altAnswers: ["mass number"],
+                hint: "Sum of p⁺ and n⁰."
+            },
+            {
+                id: 25,
+                question: "An atom with an equal number of protons and electrons carries a ________ net charge.",
+                answer: "neutral",
+                altAnswers: ["zero", "0"],
+                hint: "Positive and negative charges cancel out."
+            }
+        ];
+
+        // 3. Matching Questions Data (26-35)
+        const matchingSetA = [
+            { id: 26, term: "Alkali Metals", desc: "Group 1 metals with 1 valence electron; soft metals that react vigorously with water." },
+            { id: 27, term: "Alkaline Earth Metals", desc: "Group 2 metals with 2 valence electrons; reactive metals abundant in minerals." },
+            { id: 28, term: "Halogens", desc: "Group 17 non-metals with 7 valence electrons; highly reactive non-metals." },
+            { id: 29, term: "Noble Gases", desc: "Group 18 non-metals with complete valence shells that are chemically unreactive." },
+            { id: 30, term: "Metalloids", desc: "Elements along the staircase line with properties intermediate between metals and non-metals." }
+        ];
+
+        const matchingSetB = [
+            { id: 31, term: "Cation", desc: "A positively charged ion formed when electrons are lost." },
+            { id: 32, term: "Anion", desc: "A negatively charged ion formed when electrons are gained." },
+            { id: 33, term: "Isotopes", desc: "Atoms of the same element with identical proton numbers but different neutron numbers." },
+            { id: 34, term: "Valence Shell", desc: "The outermost occupied energy level containing electrons in an atom." },
+            { id: 35, term: "Mass Number", desc: "The total count of protons plus neutrons located inside the nucleus." }
+        ];
+
+        // 4. Subatomic Table Data (Q36-40) - Omitted values to deduce
+        const subatomicTableData = [
+            {
+                id: 36,
+                name: "Lithium-7 (Li)",
+                z: "3", a: "7", p: "3", n: "4", e: "3", charge: "0",
+                blanks: {
+                    n: { key: "tbl_36_n", correct: "4", hint: "Mass Number (7) - Protons (3) = 4 Neutrons" }
+                }
+            },
+            {
+                id: 37,
+                name: "Fluoride Ion (F⁻)",
+                z: "9", a: "19", p: "9", n: "10", e: "10", charge: "-1",
+                blanks: {
+                    e: { key: "tbl_37_e", correct: "10", hint: "9 Protons with a -1 charge = 10 Electrons" }
+                }
+            },
+            {
+                id: 38,
+                name: "Magnesium Ion (Mg²⁺)",
+                z: "12", a: "24", p: "12", n: "12", e: "10", charge: "+2",
+                blanks: {
+                    charge: { key: "tbl_38_c", correct: "+2", alt: "2+", hint: "12 Protons (+) vs 10 Electrons (-) = +2 Charge" }
+                }
+            },
+            {
+                id: 39,
+                name: "Chlorine-37 (Cl)",
+                z: "17", a: "37", p: "17", n: "20", e: "17", charge: "0",
+                blanks: {
+                    a: { key: "tbl_39_a", correct: "37", hint: "Protons (17) + Neutrons (20) = Mass Number 37" }
+                }
+            },
+            {
+                id: 40,
+                name: "Oxide Ion (O²⁻)",
+                z: "8", a: "16", p: "8", n: "8", e: "10", charge: "-2",
+                blanks: {
+                    p: { key: "tbl_40_p", correct: "8", hint: "Atomic Number Z = 8, so Protons = 8" }
+                }
+            }
+        ];
+
+        // 5. Interactive Bohr Diagram Questions (Q41-45)
+        const bohrQuestions = [
+            { id: 41, title: "Q41: Hydrogen Atom (H)", hint: "Atomic number 1 (1 e⁻ total)", protons: 1, neutrons: 0, targetRings: [1, 0, 0], explanation: "Hydrogen has 1 electron in its 1st energy shell." },
+            { id: 42, title: "Q42: Helium Atom (He)", hint: "Atomic number 2 (2 e⁻ total)", protons: 2, neutrons: 2, targetRings: [2, 0, 0], explanation: "Helium has 2 electrons filling its 1st energy shell." },
+            { id: 43, title: "Q43: Carbon Atom (C)", hint: "Atomic number 6 (6 e⁻ total)", protons: 6, neutrons: 6, targetRings: [2, 4, 0], explanation: "Carbon has 2 electrons in shell 1, and 4 valence electrons in shell 2." },
+            { id: 44, title: "Q44: Neon Atom (Ne)", hint: "Atomic number 10 (10 e⁻ total)", protons: 10, neutrons: 10, targetRings: [2, 8, 0], explanation: "Neon has 2 electrons in shell 1, and a full 8 electrons in shell 2." },
+            { id: 45, title: "Q45: Sodium Atom (Na)", hint: "Atomic number 11 (11 e⁻ total)", protons: 11, neutrons: 12, targetRings: [2, 8, 1], explanation: "Sodium has 2 electrons in shell 1, 8 in shell 2, and 1 valence electron in shell 3." }
+        ];
+
+        // Interactive Lewis Structures (Q46-50)
+        const lewisQuestions = [
+            { id: 46, title: "Q46: Hydrogen (H)", symbol: "H", hint: "Group 1 element", targetValence: 1, explanation: "Hydrogen has 1 valence electron, represented by 1 dot." },
+            { id: 47, title: "Q47: Beryllium (Be)", symbol: "Be", hint: "Group 2 element", targetValence: 2, explanation: "Beryllium in Group 2 has 2 valence electrons." },
+            { id: 48, title: "Q48: Boron (B)", symbol: "B", hint: "Group 13 element", targetValence: 3, explanation: "Boron in Group 13 has 3 valence electrons." },
+            { id: 49, title: "Q49: Nitrogen (N)", symbol: "N", hint: "Group 15 element", targetValence: 5, explanation: "Nitrogen in Group 15 has 5 valence electrons." },
+            { id: 50, title: "Q50: Chlorine (Cl)", symbol: "Cl", hint: "Group 17 element", targetValence: 7, explanation: "Chlorine in Group 17 has 7 valence electrons." }
+        ];
+
+        window.onload = function() {
+            startTimer();
+            renderMCQs();
+            renderFillInBlanks();
+            renderMatchingSets();
+            renderSubatomicTable();
+            renderBohrQuestions();
+            renderLewisQuestions();
+            updateProgress();
+        };
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                secondsElapsed++;
+                const hrs = Math.floor(secondsElapsed / 3600).toString().padStart(2, '0');
+                const mins = Math.floor((secondsElapsed % 3600) / 60).toString().padStart(2, '0');
+                const secs = (secondsElapsed % 60).toString().padStart(2, '0');
+                document.getElementById('timer-display').textContent = `${hrs}:${mins}:${secs}`;
+            }, 1000);
+        }
+
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Render Multiple Choice
+        function renderMCQs() {
+            const container = document.getElementById('mcq-container');
+            container.innerHTML = mcqQuestions.map((q) => `
+                <div id="q-card-${q.id}" class="glass-card rounded-2xl p-5 space-y-4 border border-slate-800 hover:border-slate-700 transition">
+                    <div class="flex items-start justify-between">
+                        <span class="text-xs font-bold text-blue-400 bg-blue-500/10 px-2.5 py-1 rounded-md border border-blue-500/20">
+                            Question ${q.id}
+                        </span>
+                        <span id="feedback-badge-${q.id}" class="hidden text-xs font-semibold px-2 py-0.5 rounded"></span>
+                    </div>
+
+                    <p class="text-sm font-medium text-slate-100 leading-relaxed">${q.question}</p>
+
+                    <div class="space-y-2">
+                        ${q.options.map((opt, oIdx) => `
+                            <label onclick="selectMCQ(${q.id}, ${oIdx})" class="flex items-center space-x-3 p-3 rounded-xl bg-slate-800/60 hover:bg-slate-700/60 cursor-pointer border border-slate-700/50 transition">
+                                <input type="radio" name="mcq_${q.id}" value="${oIdx}" class="w-4 h-4 text-blue-600 focus:ring-blue-500 bg-slate-900 border-slate-700">
+                                <span class="text-xs sm:text-sm text-slate-200">${opt}</span>
+                            </label>
+                        `).join('')}
+                    </div>
+
+                    <div id="explanation-${q.id}" class="hidden p-3 bg-blue-900/20 border border-blue-800/50 rounded-xl text-xs text-blue-300">
+                        <strong>Explanation:</strong> ${q.explanation}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function selectMCQ(qId, optionIdx) {
+            userAnswers[`q_${qId}`] = optionIdx;
+            updateProgress();
+        }
+
+        // Render Fill in Blanks
+        function renderFillInBlanks() {
+            const container = document.getElementById('fill-container');
+            container.innerHTML = fillQuestions.map((q) => `
+                <div id="q-card-${q.id}" class="glass-card rounded-2xl p-5 space-y-4 border border-slate-800">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-indigo-400 bg-indigo-500/10 px-2.5 py-1 rounded-md border border-indigo-500/20">
+                            Question ${q.id}
+                        </span>
+                        <span id="feedback-badge-${q.id}" class="hidden text-xs font-semibold px-2 py-0.5 rounded"></span>
+                    </div>
+
+                    <p class="text-sm font-medium text-slate-100 leading-relaxed">${q.question}</p>
+
+                    <div class="space-y-2">
+                        <input type="text" id="fill_input_${q.id}" oninput="handleFillInput(${q.id})" placeholder="Type your answer here..." 
+                               class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-slate-100 focus:outline-none focus:border-indigo-500 font-mono">
+                        <p class="text-[11px] text-slate-400 flex items-center space-x-1">
+                            <i class="fa-solid fa-lightbulb text-amber-400"></i>
+                            <span>Hint: ${q.hint}</span>
+                        </p>
+                    </div>
+
+                    <div id="explanation-${q.id}" class="hidden p-3 bg-indigo-900/20 border border-indigo-800/50 rounded-xl text-xs text-indigo-300">
+                        <strong>Correct Answer:</strong> ${q.answer}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function handleFillInput(qId) {
+            const val = document.getElementById(`fill_input_${qId}`).value.trim().toLowerCase();
+            if (val.length > 0) {
+                userAnswers[`q_${qId}`] = val;
+            } else {
+                delete userAnswers[`q_${qId}`];
+            }
+            updateProgress();
+        }
+
+        // Render Matching Sets
+        function renderMatchingSets() {
+            const setAContainer = document.getElementById('matching-set-a');
+            const setBContainer = document.getElementById('matching-set-b');
+
+            // Randomized order of options so dropdown items aren't 1:1 sequential
+            const optionsA = ["Halogens", "Alkali Metals", "Metalloids", "Noble Gases", "Alkaline Earth Metals"];
+            const optionsB = ["Valence Shell", "Cation", "Mass Number", "Anion", "Isotopes"];
+
+            setAContainer.innerHTML = matchingSetA.map(q => `
+                <div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800 space-y-2">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-purple-400">Q${q.id}</span>
+                        <span id="feedback-badge-${q.id}" class="hidden text-xs font-semibold px-2 py-0.5 rounded"></span>
+                    </div>
+                    <p class="text-xs text-slate-300 leading-snug">${q.desc}</p>
+                    <select onchange="handleMatchingSelect(${q.id}, this.value)" class="w-full bg-slate-800 border border-slate-700 text-xs text-slate-200 rounded-lg p-2 focus:outline-none focus:border-purple-500">
+                        <option value="">-- Select Chemical Family --</option>
+                        ${optionsA.map(opt => `<option value="${opt}">${opt}</option>`).join('')}
+                    </select>
+                </div>
+            `).join('');
+
+            setBContainer.innerHTML = matchingSetB.map(q => `
+                <div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800 space-y-2">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-purple-400">Q${q.id}</span>
+                        <span id="feedback-badge-${q.id}" class="hidden text-xs font-semibold px-2 py-0.5 rounded"></span>
+                    </div>
+                    <p class="text-xs text-slate-300 leading-snug">${q.desc}</p>
+                    <select onchange="handleMatchingSelect(${q.id}, this.value)" class="w-full bg-slate-800 border border-slate-700 text-xs text-slate-200 rounded-lg p-2 focus:outline-none focus:border-purple-500">
+                        <option value="">-- Select Atomic Term --</option>
+                        ${optionsB.map(opt => `<option value="${opt}">${opt}</option>`).join('')}
+                    </select>
+                </div>
+            `).join('');
+        }
+
+        function handleMatchingSelect(qId, val) {
+            if (val) {
+                userAnswers[`q_${qId}`] = val;
+            } else {
+                delete userAnswers[`q_${qId}`];
+            }
+            updateProgress();
+        }
+
+        // Render Subatomic Table (Q36-40)
+        function renderSubatomicTable() {
+            const tbody = document.getElementById('subatomic-table-body');
+            tbody.innerHTML = subatomicTableData.map(row => {
+                const isPBlank = row.blanks.p !== undefined;
+                const isNBlank = row.blanks.n !== undefined;
+                const isEBlank = row.blanks.e !== undefined;
+                const isABlank = row.blanks.a !== undefined;
+                const isCBlank = row.blanks.charge !== undefined;
+
+                return `
+                    <tr class="hover:bg-slate-800/40">
+                        <td class="p-3 font-bold text-emerald-400 text-left">Q${row.id}</td>
+                        <td class="p-3 font-medium text-white text-left">${row.name}</td>
+                        <td class="p-3 text-center">${row.z}</td>
+                        <td class="p-3 text-center">${isABlank ? `<input type="text" oninput="handleTableInput('${row.blanks.a.key}')" id="${row.blanks.a.key}" placeholder="?" class="w-16 mx-auto block bg-slate-900 border border-emerald-500/50 rounded px-2 py-1 text-center font-mono text-emerald-300 focus:outline-none focus:border-emerald-400">` : row.a}</td>
+                        <td class="p-3 text-center">${isPBlank ? `<input type="text" oninput="handleTableInput('${row.blanks.p.key}')" id="${row.blanks.p.key}" placeholder="?" class="w-16 mx-auto block bg-slate-900 border border-emerald-500/50 rounded px-2 py-1 text-center font-mono text-emerald-300 focus:outline-none focus:border-emerald-400">` : row.p}</td>
+                        <td class="p-3 text-center">${isNBlank ? `<input type="text" oninput="handleTableInput('${row.blanks.n.key}')" id="${row.blanks.n.key}" placeholder="?" class="w-16 mx-auto block bg-slate-900 border border-emerald-500/50 rounded px-2 py-1 text-center font-mono text-emerald-300 focus:outline-none focus:border-emerald-400">` : row.n}</td>
+                        <td class="p-3 text-center">${isEBlank ? `<input type="text" oninput="handleTableInput('${row.blanks.e.key}')" id="${row.blanks.e.key}" placeholder="?" class="w-16 mx-auto block bg-slate-900 border border-emerald-500/50 rounded px-2 py-1 text-center font-mono text-emerald-300 focus:outline-none focus:border-emerald-400">` : row.e}</td>
+                        <td class="p-3 text-center">${isCBlank ? `<input type="text" oninput="handleTableInput('${row.blanks.charge.key}')" id="${row.blanks.charge.key}" placeholder="?" class="w-16 mx-auto block bg-slate-900 border border-emerald-500/50 rounded px-2 py-1 text-center font-mono text-emerald-300 focus:outline-none focus:border-emerald-400">` : row.charge}</td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function handleTableInput(key) {
+            const val = document.getElementById(key).value.trim();
+            if (val.length > 0) {
+                userAnswers[key] = val;
+            } else {
+                delete userAnswers[key];
+            }
+            updateProgress();
+        }
+
+        // Render Bohr Questions
+        function renderBohrQuestions() {
+            const container = document.getElementById('bohr-questions-container');
+            container.innerHTML = bohrQuestions.map(bq => `
+                <div id="q-card-${bq.id}" class="glass-card rounded-2xl p-5 space-y-4 border border-slate-800">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-amber-400 bg-amber-500/10 px-2.5 py-1 rounded-md border border-amber-500/20">
+                            Question ${bq.id}
+                        </span>
+                        <span id="feedback-badge-${bq.id}" class="hidden text-xs font-semibold px-2 py-0.5 rounded"></span>
+                    </div>
+
+                    <div>
+                        <h5 class="text-sm font-bold text-white">${bq.title}</h5>
+                        <p class="text-xs text-slate-400 mt-0.5">${bq.hint}</p>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-around bg-slate-950/60 p-4 rounded-xl border border-slate-800 gap-4">
+                        <div class="w-48 h-48 relative flex items-center justify-center">
+                            <svg id="bohr-svg-${bq.id}" class="w-full h-full" viewBox="0 0 200 200">
+                                <!-- Rendered dynamically -->
+                            </svg>
+                        </div>
+
+                        <div class="space-y-2 w-full sm:w-auto">
+                            <div class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-1">Set Shell Electrons:</div>
+                            
+                            <div class="flex items-center justify-between space-x-3 bg-slate-900/80 p-2 rounded-lg border border-slate-800 text-xs">
+                                <span>Shell 1 (max 2):</span>
+                                <div class="flex items-center space-x-2">
+                                    <button onclick="adjustBohrRing(${bq.id}, 0, -1)" class="w-6 h-6 rounded bg-slate-800 hover:bg-slate-700 text-amber-400 font-bold">-</button>
+                                    <span id="bohr-${bq.id}-r0" class="w-4 text-center font-mono font-bold">0</span>
+                                    <button onclick="adjustBohrRing(${bq.id}, 0, 1)" class="w-6 h-6 rounded bg-slate-800 hover:bg-slate-700 text-amber-400 font-bold">+</button>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between space-x-3 bg-slate-900/80 p-2 rounded-lg border border-slate-800 text-xs">
+                                <span>Shell 2 (max 8):</span>
+                                <div class="flex items-center space-x-2">
+                                    <button onclick="adjustBohrRing(${bq.id}, 1, -1)" class="w-6 h-6 rounded bg-slate-800 hover:bg-slate-700 text-amber-400 font-bold">-</button>
+                                    <span id="bohr-${bq.id}-r1" class="w-4 text-center font-mono font-bold">0</span>
+                                    <button onclick="adjustBohrRing(${bq.id}, 1, 1)" class="w-6 h-6 rounded bg-slate-800 hover:bg-slate-700 text-amber-400 font-bold">+</button>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between space-x-3 bg-slate-900/80 p-2 rounded-lg border border-slate-800 text-xs">
+                                <span>Shell 3 (max 8):</span>
+                                <div class="flex items-center space-x-2">
+                                    <button onclick="adjustBohrRing(${bq.id}, 2, -1)" class="w-6 h-6 rounded bg-slate-800 hover:bg-slate-700 text-amber-400 font-bold">-</button>
+                                    <span id="bohr-${bq.id}-r2" class="w-4 text-center font-mono font-bold">0</span>
+                                    <button onclick="adjustBohrRing(${bq.id}, 2, 1)" class="w-6 h-6 rounded bg-slate-800 hover:bg-slate-700 text-amber-400 font-bold">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            bohrQuestions.forEach(bq => updateBohrSVG(bq.id));
+        }
+
+        function adjustBohrRing(qId, ringIdx, delta) {
+            const maxCapacities = [2, 8, 8];
+            let current = bohrState[qId][ringIdx];
+            let next = current + delta;
+
+            if (next >= 0 && next <= maxCapacities[ringIdx]) {
+                bohrState[qId][ringIdx] = next;
+                document.getElementById(`bohr-${qId}-r${ringIdx}`).textContent = next;
+                updateBohrSVG(qId);
+                
+                const totalE = bohrState[qId].reduce((a, b) => a + b, 0);
+                if (totalE > 0) {
+                    userAnswers[`q_${qId}`] = [...bohrState[qId]];
+                } else {
+                    delete userAnswers[`q_${qId}`];
+                }
+                updateProgress();
+            }
+        }
+
+        function updateBohrSVG(qId) {
+            const svg = document.getElementById(`bohr-svg-${qId}`);
+            const bq = bohrQuestions.find(q => q.id === qId);
+            const ringCounts = bohrState[qId];
+
+            const radii = [35, 60, 85];
+            let html = `
+                <!-- Nucleus -->
+                <circle cx="100" cy="100" r="22" fill="#1e293b" stroke="#f59e0b" stroke-width="2"/>
+                <text x="100" y="96" text-anchor="middle" fill="#f8fafc" font-size="10" font-weight="bold">${bq.protons}p⁺</text>
+                <text x="100" y="108" text-anchor="middle" fill="#94a3b8" font-size="9">${bq.neutrons}n⁰</text>
+            `;
+
+            radii.forEach((r, idx) => {
+                const count = ringCounts[idx];
+                const activeColor = count > 0 ? '#38bdf8' : '#334155';
+                
+                html += `<circle cx="100" cy="100" r="${r}" fill="none" stroke="${activeColor}" stroke-width="1.5" stroke-dasharray="${count > 0 ? '0' : '3'}"/>`;
+
+                for (let i = 0; i < count; i++) {
+                    const angle = (i * (2 * Math.PI / count)) - (Math.PI / 2);
+                    const ex = 100 + r * Math.cos(angle);
+                    const ey = 100 + r * Math.sin(angle);
+                    html += `<circle cx="${ex}" cy="${ey}" r="4.5" fill="#38bdf8" stroke="#0284c7" stroke-width="1.5" class="electron-dot"/>`;
+                }
+            });
+
+            svg.innerHTML = html;
+        }
+
+        // Render Lewis Structures
+        function renderLewisQuestions() {
+            const container = document.getElementById('lewis-questions-container');
+            container.innerHTML = lewisQuestions.map(lq => `
+                <div id="q-card-${lq.id}" class="glass-card rounded-2xl p-5 space-y-4 border border-slate-800">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-amber-400 bg-amber-500/10 px-2.5 py-1 rounded-md border border-amber-500/20">
+                            Question ${lq.id}
+                        </span>
+                        <span id="feedback-badge-${lq.id}" class="hidden text-xs font-semibold px-2 py-0.5 rounded"></span>
+                    </div>
+
+                    <div>
+                        <h5 class="text-sm font-bold text-white">${lq.title}</h5>
+                        <p class="text-xs text-slate-400 mt-0.5">${lq.hint}</p>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-around bg-slate-950/60 p-4 rounded-xl border border-slate-800 gap-4">
+                        <div class="w-40 h-40 relative flex items-center justify-center bg-slate-900/50 rounded-2xl border border-slate-800">
+                            <svg id="lewis-svg-${lq.id}" class="w-full h-full" viewBox="0 0 160 160">
+                                <!-- Populated dynamically -->
+                            </svg>
+                        </div>
+
+                        <div class="space-y-3 text-center">
+                            <div class="text-xs text-slate-300 font-medium">Valence Dots:</div>
+                            <div class="flex items-center justify-center space-x-3">
+                                <button onclick="adjustLewisValence(${lq.id}, -1)" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-400 font-bold text-base border border-slate-700">-</button>
+                                <span id="lewis-count-${lq.id}" class="text-xl font-mono font-bold text-white w-6">0</span>
+                                <button onclick="adjustLewisValence(${lq.id}, 1)" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-400 font-bold text-base border border-slate-700">+</button>
+                            </div>
+                            <p class="text-[10px] text-slate-500">Click + or - to set valence dots</p>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            lewisQuestions.forEach(lq => updateLewisSVG(lq.id));
+        }
+
+        function adjustLewisValence(qId, delta) {
+            let current = lewisState[qId];
+            let next = current + delta;
+            if (next >= 0 && next <= 8) {
+                lewisState[qId] = next;
+                document.getElementById(`lewis-count-${qId}`).textContent = next;
+                updateLewisSVG(qId);
+
+                userAnswers[`q_${qId}`] = next;
+                updateProgress();
+            }
+        }
+
+        function updateLewisSVG(qId) {
+            const svg = document.getElementById(`lewis-svg-${qId}`);
+            const lq = lewisQuestions.find(q => q.id === qId);
+            const count = lewisState[qId];
+
+            const dotPositions = [
+                { cx: 80, cy: 35 },
+                { cx: 125, cy: 80 },
+                { cx: 80, cy: 125 },
+                { cx: 35, cy: 80 },
+                { cx: 90, cy: 35 },
+                { cx: 125, cy: 90 },
+                { cx: 90, cy: 125 },
+                { cx: 35, cy: 90 }
+            ];
+
+            let html = `
+                <text x="80" y="88" text-anchor="middle" fill="#f8fafc" font-size="24" font-weight="extrabold" font-family="sans-serif">${lq.symbol}</text>
+            `;
+
+            for (let i = 0; i < count; i++) {
+                const pos = dotPositions[i];
+                html += `<circle cx="${pos.cx}" cy="${pos.cy}" r="5" fill="#f59e0b" stroke="#d97706" stroke-width="1.5" class="electron-dot"/>`;
+            }
+
+            svg.innerHTML = html;
+        }
+
+        // Update Progress Bar
+        function updateProgress() {
+            const answeredCount = Object.keys(userAnswers).length;
+            const progressPercent = (answeredCount / 50) * 100;
+            document.getElementById('progress-bar').style.width = `${progressPercent}%`;
+            document.getElementById('progress-text').textContent = `${answeredCount}/50 Answered`;
+        }
+
+        // Exam Evaluation & Analysis Engine
+        function submitExam() {
+            let totalScore = 0;
+            const breakdown = {
+                mcq: { score: 0, max: 15 },
+                fill: { score: 0, max: 10 },
+                matching: { score: 0, max: 10 },
+                table: { score: 0, max: 5 },
+                bohr: { score: 0, max: 5 },
+                lewis: { score: 0, max: 5 }
+            };
+
+            const reviewItems = []; // Collects all user answers & corrections for detailed review
+
+            // 1. MCQs (1-15)
+            mcqQuestions.forEach(q => {
+                const userChoice = userAnswers[`q_${q.id}`];
+                const badge = document.getElementById(`feedback-badge-${q.id}`);
+                const exp = document.getElementById(`explanation-${q.id}`);
+
+                const isCorrect = userChoice === q.correct;
+                if (userChoice !== undefined) {
+                    if (isCorrect) {
+                        totalScore++;
+                        breakdown.mcq.score++;
+                        badge.textContent = "✓ Correct";
+                        badge.className = "text-xs font-semibold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30";
+                    } else {
+                        badge.textContent = "✗ Incorrect";
+                        badge.className = "text-xs font-semibold px-2 py-0.5 rounded bg-rose-500/20 text-rose-400 border border-rose-500/30";
+                    }
+                } else {
+                    badge.textContent = "Unanswered";
+                    badge.className = "text-xs font-semibold px-2 py-0.5 rounded bg-slate-700 text-slate-400";
+                }
+                badge.classList.remove('hidden');
+                if (exp) exp.classList.remove('hidden');
+
+                reviewItems.push({
+                    qNum: q.id,
+                    prompt: q.question,
+                    isCorrect: isCorrect,
+                    userAns: userChoice !== undefined ? q.options[userChoice] : "None",
+                    correctAns: q.options[q.correct],
+                    explanation: q.explanation
+                });
+            });
+
+            // 2. Fill in Blanks (16-25)
+            fillQuestions.forEach(q => {
+                const val = (userAnswers[`q_${q.id}`] || "").toString().trim().toLowerCase();
+                const badge = document.getElementById(`feedback-badge-${q.id}`);
+                const exp = document.getElementById(`explanation-${q.id}`);
+
+                const isCorrect = val === q.answer.toLowerCase() || q.altAnswers.some(a => a.toLowerCase() === val);
+                
+                if (val.length > 0) {
+                    if (isCorrect) {
+                        totalScore++;
+                        breakdown.fill.score++;
+                        badge.textContent = "✓ Correct";
+                        badge.className = "text-xs font-semibold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30";
+                    } else {
+                        badge.textContent = "✗ Incorrect";
+                        badge.className = "text-xs font-semibold px-2 py-0.5 rounded bg-rose-500/20 text-rose-400 border border-rose-500/30";
+                    }
+                } else {
+                    badge.textContent = "Unanswered";
+                    badge.className = "text-xs font-semibold px-2 py-0.5 rounded bg-slate-700 text-slate-400";
+                }
+                badge.classList.remove('hidden');
+                if (exp) exp.classList.remove('hidden');
+
+                reviewItems.push({
+                    qNum: q.id,
+                    prompt: q.question,
+                    isCorrect: isCorrect,
+                    userAns: val.length > 0 ? val : "None",
+                    correctAns: q.answer,
+                    explanation: q.hint
+                });
+            });
+
+            // 3. Matching Sets (26-35)
+            [...matchingSetA, ...matchingSetB].forEach(q => {
+                const val = userAnswers[`q_${q.id}`];
+                const badge = document.getElementById(`feedback-badge-${q.id}`);
+
+                const isCorrect = val === q.term;
+                if (val) {
+                    if (isCorrect) {
+                        totalScore++;
+                        breakdown.matching.score++;
+                        badge.textContent = "✓ Correct";
+                        badge.className = "text-xs font-semibold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30";
+                    } else {
+                        badge.textContent = "✗ Incorrect";
+                        badge.className = "text-xs font-semibold px-2 py-0.5 rounded bg-rose-500/20 text-rose-400 border border-rose-500/30";
+                    }
+                } else {
+                    badge.textContent = "Unanswered";
+                    badge.className = "text-xs font-semibold px-2 py-0.5 rounded bg-slate-700 text-slate-400";
+                }
+                badge.classList.remove('hidden');
+
+                reviewItems.push({
+                    qNum: q.id,
+                    prompt: q.desc,
+                    isCorrect: isCorrect,
+                    userAns: val ? val : "None",
+                    correctAns: q.term,
+                    explanation: `Matched description for ${q.term}.`
+                });
+            });
+
+            // 4. Subatomic Table (36-40)
+            subatomicTableData.forEach(row => {
+                let rowCorrect = true;
+                let userValStr = "";
+                let targetValStr = "";
+                let rowHint = "";
+
+                Object.keys(row.blanks).forEach(bKey => {
+                    const field = row.blanks[bKey];
+                    const userVal = (userAnswers[field.key] || "").trim().toLowerCase();
+                    const targetVal = field.correct.toLowerCase();
+                    const altVal = field.alt ? field.alt.toLowerCase() : targetVal;
+
+                    userValStr = userVal || "None";
+                    targetValStr = field.correct;
+                    rowHint = field.hint;
+
+                    const inputElem = document.getElementById(field.key);
+                    if (userVal === targetVal || userVal === altVal) {
+                        if (inputElem) inputElem.className = "w-16 bg-emerald-900/40 border border-emerald-500 rounded px-2 py-1 text-center font-mono text-emerald-300";
+                    } else {
+                        rowCorrect = false;
+                        if (inputElem) inputElem.className = "w-16 bg-rose-900/40 border border-rose-500 rounded px-2 py-1 text-center font-mono text-rose-300";
+                    }
+                });
+
+                if (rowCorrect) {
+                    totalScore++;
+                    breakdown.table.score++;
+                }
+
+                reviewItems.push({
+                    qNum: row.id,
+                    prompt: `Table Calculation for ${row.name}`,
+                    isCorrect: rowCorrect,
+                    userAns: userValStr,
+                    correctAns: targetValStr,
+                    explanation: rowHint
+                });
+            });
+
+            // 5. Bohr Models (41-45)
+            bohrQuestions.forEach(bq => {
+                const userRings = userAnswers[`q_${bq.id}`];
+                const badge = document.getElementById(`feedback-badge-${bq.id}`);
+                
+                let isCorrect = false;
+                if (userRings && Array.isArray(userRings)) {
+                    isCorrect = userRings[0] === bq.targetRings[0] &&
+                                userRings[1] === (bq.targetRings[1] || 0) &&
+                                userRings[2] === (bq.targetRings[2] || 0);
+                }
+
+                if (userRings) {
+                    if (isCorrect) {
+                        totalScore++;
+                        breakdown.bohr.score++;
+                        badge.textContent = "✓ Correct Diagram";
+                        badge.className = "text-xs font-semibold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30";
+                    } else {
+                        badge.textContent = "✗ Incorrect Shells";
+                        badge.className = "text-xs font-semibold px-2 py-0.5 rounded bg-rose-500/20 text-rose-400 border border-rose-500/30";
+                    }
+                } else {
+                    badge.textContent = "Unanswered";
+                    badge.className = "text-xs font-semibold px-2 py-0.5 rounded bg-slate-700 text-slate-400";
+                }
+                badge.classList.remove('hidden');
+
+                reviewItems.push({
+                    qNum: bq.id,
+                    prompt: `Bohr Structure: ${bq.title}`,
+                    isCorrect: isCorrect,
+                    userAns: userRings ? `[${userRings.join(', ')}] e⁻` : "None",
+                    correctAns: `[${bq.targetRings.join(', ')}] e⁻`,
+                    explanation: bq.explanation
+                });
+            });
+
+            // 6. Lewis Structures (46-50)
+            lewisQuestions.forEach(lq => {
+                const userVal = userAnswers[`q_${lq.id}`];
+                const badge = document.getElementById(`feedback-badge-${lq.id}`);
+
+                const isCorrect = userVal === lq.targetValence;
+                if (userVal !== undefined) {
+                    if (isCorrect) {
+                        totalScore++;
+                        breakdown.lewis.score++;
+                        badge.textContent = "✓ Correct Dots";
+                        badge.className = "text-xs font-semibold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30";
+                    } else {
+                        badge.textContent = "✗ Incorrect Dots";
+                        badge.className = "text-xs font-semibold px-2 py-0.5 rounded bg-rose-500/20 text-rose-400 border border-rose-500/30";
+                    }
+                } else {
+                    badge.textContent = "Unanswered";
+                    badge.className = "text-xs font-semibold px-2 py-0.5 rounded bg-slate-700 text-slate-400";
+                }
+                badge.classList.remove('hidden');
+
+                reviewItems.push({
+                    qNum: lq.id,
+                    prompt: `Lewis Dots: ${lq.title}`,
+                    isCorrect: isCorrect,
+                    userAns: userVal !== undefined ? `${userVal} dots` : "None",
+                    correctAns: `${lq.targetValence} dots`,
+                    explanation: lq.explanation
+                });
+            });
+
+            // Show Results Modal with review items
+            showResultsModal(totalScore, breakdown, reviewItems);
+        }
+
+        function showResultsModal(score, breakdown, reviewItems) {
+            const percent = Math.round((score / 50) * 100);
+            document.getElementById('score-total').textContent = `${score} / 50`;
+            document.getElementById('score-percent').textContent = `${percent}%`;
+
+            let grade = 'F';
+            let recText = "";
+            if (percent >= 90) {
+                grade = 'A+';
+                recText = "Outstanding mastery! You demonstrated complete command over subatomic calculations, ions, isotopes, periodic families, Bohr diagrams, and Lewis dot structures.";
+            } else if (percent >= 80) {
+                grade = 'A';
+                recText = "Great job! You have a strong grasp of Grade 10 atomic theory. Review your minor missed items below to lock in a perfect score.";
+            } else if (percent >= 70) {
+                grade = 'B';
+                recText = "Good effort! You showed strong foundational knowledge. Take a look at the detailed wrong answer list below to clear up any lingering confusion.";
+            } else if (percent >= 60) {
+                grade = 'C';
+                recText = "You passed! Focus your review on calculating ion electron totals and Bohr shell electron capacities.";
+            } else {
+                grade = 'Needs Review';
+                recText = "Practice calculating subatomic particle numbers (protons, neutrons, electrons) and setting valence shell dots using the periodic table reference.";
+            }
+
+            document.getElementById('score-grade').textContent = grade;
+            document.getElementById('recommendations-text').textContent = recText;
+
+            const bContainer = document.getElementById('section-breakdown');
+            bContainer.innerHTML = `
+                <div class="flex justify-between p-2.5 bg-slate-900 rounded-xl border border-slate-800">
+                    <span>Part 1: Multiple Choice</span>
+                    <span class="font-mono font-bold text-blue-400">${breakdown.mcq.score}/${breakdown.mcq.max}</span>
+                </div>
+                <div class="flex justify-between p-2.5 bg-slate-900 rounded-xl border border-slate-800">
+                    <span>Part 2: Fill in Blanks</span>
+                    <span class="font-mono font-bold text-indigo-400">${breakdown.fill.score}/${breakdown.fill.max}</span>
+                </div>
+                <div class="flex justify-between p-2.5 bg-slate-900 rounded-xl border border-slate-800">
+                    <span>Part 3: Matching Concepts</span>
+                    <span class="font-mono font-bold text-purple-400">${breakdown.matching.score}/${breakdown.matching.max}</span>
+                </div>
+                <div class="flex justify-between p-2.5 bg-slate-900 rounded-xl border border-slate-800">
+                    <span>Part 4: Subatomic Table</span>
+                    <span class="font-mono font-bold text-emerald-400">${breakdown.table.score}/${breakdown.table.max}</span>
+                </div>
+                <div class="flex justify-between p-2.5 bg-slate-900 rounded-xl border border-slate-800">
+                    <span>Part 5: Bohr Models</span>
+                    <span class="font-mono font-bold text-amber-400">${breakdown.bohr.score}/${breakdown.bohr.max}</span>
+                </div>
+                <div class="flex justify-between p-2.5 bg-slate-900 rounded-xl border border-slate-800">
+                    <span>Part 5: Lewis Structures</span>
+                    <span class="font-mono font-bold text-amber-400">${breakdown.lewis.score}/${breakdown.lewis.max}</span>
+                </div>
+            `;
+
+            // Populate Answer Review Section
+            const wrongContainer = document.getElementById('wrong-questions-list');
+            const wrongItems = reviewItems.filter(item => !item.isCorrect);
+            
+            document.getElementById('wrong-count-badge').textContent = `${wrongItems.length} Incorrect / Unanswered`;
+
+            if (wrongItems.length === 0) {
+                wrongContainer.innerHTML = `
+                    <div class="p-4 bg-emerald-950/40 border border-emerald-500/30 rounded-2xl text-center text-emerald-300 text-xs font-semibold">
+                        🎉 Perfect Score! You answered all 50 questions correctly!
+                    </div>
+                `;
+            } else {
+                wrongContainer.innerHTML = wrongItems.map(item => `
+                    <div class="p-3.5 bg-slate-900/90 border border-rose-500/30 rounded-2xl space-y-2 text-xs">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-rose-400">Question ${item.qNum}</span>
+                            <span class="bg-rose-500/10 text-rose-400 px-2 py-0.5 rounded border border-rose-500/20 text-[10px] font-semibold">Incorrect</span>
+                        </div>
+                        <p class="text-slate-200 font-medium">${item.prompt}</p>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1 font-mono text-[11px]">
+                            <div class="p-2 bg-rose-950/40 border border-rose-800/40 rounded-lg text-rose-300">
+                                <span class="text-slate-400 text-[10px] block font-sans">Your Response:</span>
+                                <span>${item.userAns}</span>
+                            </div>
+                            <div class="p-2 bg-emerald-950/40 border border-emerald-800/40 rounded-lg text-emerald-300">
+                                <span class="text-slate-400 text-[10px] block font-sans">Correct Answer:</span>
+                                <span>${item.correctAns}</span>
+                            </div>
+                        </div>
+
+                        <p class="text-[11px] text-slate-400 pt-1 border-t border-slate-800">
+                            <strong class="text-slate-300">Note:</strong> ${item.explanation}
+                        </p>
+                    </div>
+                `).join('');
+            }
+
+            document.getElementById('results-modal').classList.remove('hidden');
+        }
+
+        // Periodic Table Zoom Logic
+        function zoomPTable(delta) {
+            currentPTableScale = Math.max(0.75, Math.min(3.0, currentPTableScale + delta));
+            applyPTableZoom();
+        }
+
+        function resetPTableZoom() {
+            currentPTableScale = 1.0;
+            applyPTableZoom();
+        }
+
+        function applyPTableZoom() {
+            const imgWrapper = document.getElementById('ptable-wrapper');
+            imgWrapper.style.transform = `scale(${currentPTableScale})`;
+            document.getElementById('zoom-level-text').textContent = `${Math.round(currentPTableScale * 100)}%`;
+        }
+
+        function handlePTableImageError(imgElem) {
+            // Fallback image source if primary image fails to load
+            imgElem.src = "https://upload.wikimedia.org/wikipedia/commons/4/4d/Periodic_table_large.svg";
+        }
+
+        function closeResultsModal() {
+            document.getElementById('results-modal').classList.add('hidden');
+        }
+
+        function openPeriodicTableModal() {
+            resetPTableZoom();
+            document.getElementById('ptable-modal').classList.remove('hidden');
+        }
+
+        function closePeriodicTableModal() {
+            document.getElementById('ptable-modal').classList.add('hidden');
+        }
+
+        function resetTest() {
+            location.reload();
+        }
+    </script>
+</body>
+</html>
